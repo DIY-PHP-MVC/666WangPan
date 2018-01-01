@@ -1,12 +1,24 @@
-﻿<!DOCTYPE html>
+﻿<?php
+ini_set( "display_errors", "On" );
+error_reporting( E_ALL | E_STRICT );
+require_once 'class.dir.php';
+
+$path = "D:/AppService/UPUPW_AP5.3/htdocs/exe/upload/";
+$dir  = new dir();
+if (empty($_GET['search'])) {
+	$_GET['search'] = "";
+}
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title></title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
-    <script src="/js/jquery/jquery-1.11.2.min.js" type="text/javascript"></script>
-    <script src="/js/layer/layer.js" type="text/javascript"></script>
-    <script src="/js/base.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/css/index.css"/>
+    <script src="/js/jquery/jquery-1.11.2.min.js"></script>
+    <script src="/js/layer/layer.js"></script>
+    <script src="/js/base.js"></script>
 </head>
 <body>
 <form action="/upload.php" enctype="multipart/form-data" method="post" name="upload" style="display: none">
@@ -15,19 +27,9 @@
 </form>
 <div class="file">
     <ul>
-        <?php
-        ini_set("display_errors", "On");
-        error_reporting(E_ALL | E_STRICT);
-        require_once 'class.dir.php';
-
-        $path = "D:/AppService/UPUPW_AP5.3/htdocs/exe/upload/";
-        $dir = new dir();
-        //        搜索入口
-        if (!(isset($_GET['search']) && $_GET['search'] != "")) {
-            $_GET['search'] = "";
-        }
-        $dir->odir($path, $_GET['search']);
-        ?>
+		<?php
+		$dir->odir( $path, $_GET['search'] );
+		?>
     </ul>
 </div>
 <script type="application/javascript">
@@ -47,9 +49,11 @@
             )
         });
     }
+
     function uploadFile() {
         document.getElementById("files").click();
     }
+
     function submitFiles() {
         document.getElementById("submitId").click();
     }
