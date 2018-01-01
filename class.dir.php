@@ -1,7 +1,7 @@
 ﻿<?php
-/*
-**文件管理类
-*/
+/**
+ * 文件管理类
+ */
 header("content-type:text/html;charset=utf-8");
 error_reporting(0);
 
@@ -190,15 +190,16 @@ class edit
         $filesub = substr($this->file, $filepoint + 1);
         $this->filetype = $filesub;
         $this->filename = basename($this->file);
-        //以数组形式返回：文件类型 文件名称 文件内容 文件路径
+
+	    fclose($this->file);
+
+	    //以数组形式返回：文件类型 文件名称 文件内容 文件路径
         return array(
             'filetype' => $this->filetype,
             'filename' => $this->filename,
             'filecontent' => $this->fileread,
             'filepath' => $this->file
         );
-        //关闭文件
-        fclose($this->file);
     }
 
     /* 修改文件函数 */
