@@ -81,7 +81,7 @@ class dir
 
                     } else {
                         $needBreak = false;
-                        if ($search != "") {
+                        if ($search) {
 //                            exit($this->filee.'-'.$search);
                             if (!(strpos(($this->filee), $search) > -1)) {
                                 $needBreak = true;
