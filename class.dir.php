@@ -35,18 +35,14 @@ class dir
         if (!$path) {
             die("error 没有定义路径请定义路径！");
         }
-        //开始获取路径编码并强行转为gbk
-        //然后用gbk的方式来获取文件后强行转为utf-8显示
-        $this->pathChar = mb_detect_encoding($this->path, array('UTF-8', 'GBK', 'LATIN1', 'BIG5'));
-        $this->pathChar = strtolower($this->pathChar);
-        if ($this->pathChar != 'gbk') {
-            $this->pathGbk = iconv($this->pathChar, 'gbk', $this->path);
-        }
-        if (!is_dir($this->pathGbk)) {
-            die("error 不是一个正确的路径！");
-        }
-        $this->opendirr = opendir($this->pathGbk);
-        if (!$this->opendirr) {
+
+	    /**
+	     * 开始获取路径编码并强行转为gbk
+	     * 然后用gbk的方式来获取文件后强行转为utf-8显示
+	     */
+	    $this->utf8();
+
+	    if (!$this->opendirr) {
             die('error 打开文件夹失败！');
         }
 
@@ -60,7 +56,7 @@ class dir
             $charset = mb_detect_encoding($this->filee, array('UTF-8', 'GBK', 'LATIN1', 'BIG5'));
             $charset = strtolower($charset);
             /* 转换为utf-8 */
-            if ($charset != 'utf-8' || $charset != 'utf8') {
+            if (!in_array($charset, array('utf8', 'utf-8'))) {
                 //$char = iconv($charset, 'cp960', $this->filee);
                 $this->filee = iconv($charset, 'utf-8', $this->filee);
             }
@@ -152,6 +148,18 @@ class dir
         $size /= pow(1024, $p);
         return number_format($size, 3);
     }
+
+	public function utf8() {
+		$this->pathChar = mb_detect_encoding( $this->path, array( 'UTF-8', 'GBK', 'LATIN1', 'BIG5' ) );
+		$this->pathChar = strtolower( $this->pathChar );
+		if ( $this->pathChar != 'gbk' ) {
+			$this->pathGbk = iconv( $this->pathChar, 'gbk', $this->path );
+		}
+		if ( ! is_dir( $this->pathGbk ) ) {
+			die( "error，不是一个正确的路径！" );
+		}
+		$this->opendirr = opendir( $this->pathGbk );
+	}
 
 }
 
