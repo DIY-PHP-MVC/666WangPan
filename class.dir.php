@@ -71,7 +71,7 @@ class dir
             /* 开始switch判断把默认的 . 与 ..改成返回上一页与反回首页 */
             switch ($this->filee) {
                 case '.':
-                    $backs = "<li>搜索文件:<input class='searchInput' value='".$search."' id='search' type='text'  \> </li>";
+                    $backs = "<li>搜索文件:<input class='searchInput' value='" . $search . "' id='search' type='text'  \> </li>";
                     break;
                 case '..':
                     $homes = "<li><a href='index.php?url={$this->doc_root}'><img src='img/index.png' style='width:25px;height:25px' >站点首页  -(滑稽滑稽,在这光滑的键盘上滑稽)</a>
@@ -80,7 +80,7 @@ class dir
                     break;
                 default :
                     /* $this->zsPath  拼接的gbk路径  用于判断是否为文件夹 */
-                    $this->zsPath = $this->pathGbk  . $this->fileOutChar;
+                    $this->zsPath = $this->pathGbk . $this->fileOutChar;
                     if (is_dir($this->zsPath)) {
 
                     } else {
@@ -116,11 +116,15 @@ class dir
                             $this->sub = 'no';
                         }
                         //否则使用img目录对于的后缀名
-                        $files .= "<li><img src='img/{$this->sub}.png' style='width:30px;height:30px' ><a href='/upload/{$this->filee}'>"
+                        $files .= "<li><img src='img/{$this->sub}.png' style='width:30px;height:30px' >
+                            <a href='/upload/{$this->filee}'>"
                             . $this->filee
                             . "</a>"
                             . "<span style='float: right'>"
-                            . "<span style='margin-right: 50px;'> " . $this->getsize(filesize($this->path . '/' . $this->filee), 'mb') . 'M' . "</span>"
+                            . "<span style='margin-right: 50px;'> "
+                            . $this->getsize(filesize($this->path . $this->filee), 'mb')
+                            . 'M'
+                            . "</span>"
                             . "<a  onclick='delFileOrDir(\"{$this->path}/{$this->filee}\",\"file\",this)' >删除</a></li>"
                             . "</span>";
 
