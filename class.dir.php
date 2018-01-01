@@ -25,6 +25,7 @@ class dir
 
     public function __construct()
     {
+    	require_once "config.php";
         $this->doc_root = $_SERVER['DOCUMENT_ROOT'];
     }
 

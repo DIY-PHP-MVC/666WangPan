@@ -2,8 +2,9 @@
 ini_set( "display_errors", "On" );
 error_reporting( E_ALL | E_STRICT );
 require_once 'class.dir.php';
+$config = require_once "config.php";
 
-$path = "D:/AppService/UPUPW_AP5.3/htdocs/exe/upload/";
+$path = $config['path'];
 $dir  = new dir();
 if (empty($_GET['search'])) {
 	$_GET['search'] = "";
