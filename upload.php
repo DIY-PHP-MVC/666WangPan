@@ -1,5 +1,6 @@
 
 <?php
+require_once 'class.dir.php';
 header("Content-Type:text/html; charset=utf-8");
 function count_size($bit)
 {
@@ -24,7 +25,7 @@ if ($name) {
     echo '文件类型：' . $type . '<br />';
     echo '临时文件名字:' . $tmp_name . '<br />';
     echo '文件大小:' . $temp . '<br />';
-    $path = 'D:/AppService/UPUPW_AP5.3/htdocs/exe/upload/';
+    $path = $config['path'];
     echo '<br />' . '上传状态:' . '<br />';
     echo '--------------------------------' . '<br />';
     if (move_uploaded_file($tmp_name, $path . $name))
