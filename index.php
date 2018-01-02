@@ -3,7 +3,6 @@ ini_set( "display_errors", "On" );
 error_reporting( E_ALL | E_STRICT );
 require_once 'class.dir.php';
 $config = require_once "config.php";
-
 $path = $config['path'];
 $dir  = new dir();
 if (empty($_GET['search'])) {
@@ -44,7 +43,7 @@ if (empty($_GET['search'])) {
                     type: type
                 },
                 function (data) {
-                    layer.msg(data)
+                    layer.msg(data);
                     $(obj).parent().parent().remove();
                 }
             )
@@ -64,7 +63,7 @@ if (empty($_GET['search'])) {
             if (key.keyCode == 13) {
                 window.location.href = "?search=" + $("#search").val();
             }
-        })
+        });
         $("#search").focus();
     })
 </script>

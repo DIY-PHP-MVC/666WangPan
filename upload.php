@@ -1,6 +1,15 @@
 
 <?php
 header("Content-Type:text/html; charset=utf-8");
+
+$config = require_once "config.php";
+$path = $config['path'];
+
+/**
+ * @param $bit
+ *
+ * @return string 文件单位转换
+ */
 function count_size($bit)
 {
     $type = array('Bytes', 'KB', 'MB', 'GB', 'TB');
@@ -8,7 +17,7 @@ function count_size($bit)
         $bit /= 1024;
     }
     return (floor($bit * 100) / 100) . $type[$i];
-}//文件单位转换
+}
 
 $name = @$_FILES['file']['name'];
 $type = @$_FILES['file']['type'];
@@ -24,14 +33,12 @@ if ($name) {
     echo '文件类型：' . $type . '<br />';
     echo '临时文件名字:' . $tmp_name . '<br />';
     echo '文件大小:' . $temp . '<br />';
-    $path = 'D:/AppService/UPUPW_AP5.3/htdocs/exe/upload/';
     echo '<br />' . '上传状态:' . '<br />';
     echo '--------------------------------' . '<br />';
     if (move_uploaded_file($tmp_name, $path . $name))
         echo '文件上传成功！' . '<br />';
     else
         echo '文件上传失败！' . '<br />';
-    echo '<button type="button" onclick="window.location.href=\'/\'">回去</button>';
+    echo '<button type="button" onclick="window.location.href=\'/\'">返回</button>';
     echo '</div>';
 }
-?>
