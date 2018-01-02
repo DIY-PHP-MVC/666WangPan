@@ -34,10 +34,6 @@ if ($name) {
     echo '文件类型：' . $type . '<br />';
     echo '临时文件名字:' . $tmp_name . '<br />';
     echo '文件大小:' . $temp . '<br />';
-<<<<<<< HEAD
-=======
-    $path = $config['path'];
->>>>>>> 4488c96e79d79d282303aff954a056b1f02e129e
     echo '<br />' . '上传状态:' . '<br />';
     echo '--------------------------------' . '<br />';
     if (move_uploaded_file($tmp_name, $path . $name))
